@@ -3,37 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nhật Ký Cảm Xúc 🌸</title>
+    <title>Trạm Cảm Xúc 🌸</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
 
-        * {
-            box-sizing: border-box;
-            font-family: 'Quicksand', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
+            font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #ffdde1, #ee9ca7);
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 20px;
             color: #555;
         }
 
-        .app-container {
-            background: rgba(255, 255, 255, 0.85);
+        /* ════════════════════════════════
+           LOGIN SCREEN
+        ════════════════════════════════ */
+        #loginScreen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 40px);
+            width: 100%;
+        }
+
+        .login-card {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 48px 36px;
+            text-align: center;
+            max-width: 380px;
+            width: 100%;
+            box-shadow: 0 20px 50px rgba(238,156,167,0.35);
+            animation: floatIn 0.6s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .login-logo { font-size: 64px; margin-bottom: 12px; }
+
+        .login-card h2 {
+            color: #ff758c;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .btn-google {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 28px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #444;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-google:hover {
+            border-color: #ff758c;
+            box-shadow: 0 6px 20px rgba(255,117,140,0.25);
+            transform: translateY(-2px);
+        }
+
+        .btn-google svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+        /* ════════════════════════════════
+           APP SCREEN
+        ════════════════════════════════ */
+        #appScreen { display: none; width: 100%; max-width: 620px; margin: 0 auto; padding-top: 10px; }
+
+        /* ── Top bar ── */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255,255,255,0.85);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 12px 18px;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(238,156,167,0.2);
+            gap: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid #ffb6c1;
+            flex-shrink: 0;
+            background: #ffdde1;
+            object-fit: cover;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: #ff758c;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-email {
+            font-size: 11px;
+            color: #bbb;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-logout {
+            padding: 8px 16px;
+            border: 1.5px solid #ffb6c1;
+            border-radius: 12px;
+            background: transparent;
+            color: #ff758c;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex-shrink: 0;
+            align-self: auto;
+            margin-bottom: 0;
+        }
+
+        .btn-logout:hover {
+            background: #fff0f3;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ── App card ── */
+        .app-container {
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.5);
             border-radius: 30px;
             padding: 30px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 15px 35px rgba(238, 156, 167, 0.3);
+            box-shadow: 0 15px 35px rgba(238,156,167,0.3);
         }
 
         h1 {
@@ -47,13 +188,8 @@
             gap: 10px;
         }
 
-        /* ── Firebase status badge ── */
-        .status-bar {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 13px;
-            font-weight: 700;
-        }
+        /* ── Status badge ── */
+        .status-bar { text-align: center; margin-bottom: 20px; font-size: 13px; font-weight: 700; }
 
         .status-badge {
             display: inline-flex;
@@ -67,33 +203,14 @@
             transition: all 0.4s;
         }
 
-        .status-badge.connecting {
-            background: #fffbeb;
-            color: #d97706;
-            border-color: #fde68a;
-        }
+        .status-badge.connecting { background: #fffbeb; color: #d97706; border-color: #fde68a; }
+        .status-badge.error      { background: #fef2f2; color: #dc2626; border-color: #fecaca; }
 
-        .status-badge.error {
-            background: #fef2f2;
-            color: #dc2626;
-            border-color: #fecaca;
-        }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
 
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: currentColor;
-        }
+        .status-badge.connecting .status-dot { animation: pulse 1s infinite; }
 
-        .status-badge.connecting .status-dot {
-            animation: pulse 1s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
         /* ── Controls ── */
         .controls {
@@ -108,17 +225,9 @@
             border: 2px dashed #ffb6c1;
         }
 
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+        .control-group { display: flex; flex-direction: column; gap: 5px; }
 
-        label {
-            font-weight: 700;
-            color: #ff758c;
-            font-size: 14px;
-        }
+        label { font-weight: 700; color: #ff758c; font-size: 14px; }
 
         select {
             padding: 10px 15px;
@@ -130,11 +239,10 @@
             outline: none;
             cursor: pointer;
             transition: all 0.3s;
+            font-family: 'Quicksand', sans-serif;
         }
 
-        select:focus {
-            box-shadow: 0 0 0 3px rgba(255, 117, 140, 0.2);
-        }
+        select:focus { box-shadow: 0 0 0 3px rgba(255,117,140,0.2); }
 
         button {
             padding: 10px 25px;
@@ -144,27 +252,18 @@
             color: white;
             font-size: 16px;
             font-weight: 700;
+            font-family: 'Quicksand', sans-serif;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
             align-self: flex-end;
             margin-bottom: 2px;
         }
 
-        button:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 117, 140, 0.4);
-        }
+        button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,117,140,0.4); }
+        button:active:not(:disabled) { transform: translateY(0); }
+        button:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        button:active:not(:disabled) {
-            transform: translateY(0);
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* ── Save toast ── */
+        /* ── Toast ── */
         .toast {
             position: fixed;
             bottom: 30px;
@@ -176,20 +275,19 @@
             border-radius: 20px;
             font-weight: 700;
             font-size: 15px;
+            font-family: 'Quicksand', sans-serif;
             box-shadow: 0 6px 20px rgba(255,117,140,0.4);
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
             z-index: 999;
             pointer-events: none;
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); }
 
         /* ── Calendar ── */
         .calendar {
             display: grid;
-            grid-template-columns: repeat(7, 1fr);
+            grid-template-columns: repeat(7,1fr);
             gap: 10px;
             margin-bottom: 30px;
         }
@@ -201,35 +299,16 @@
             text-align: center;
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
             transition: all 0.3s ease;
-            position: relative;
             border: 1px solid transparent;
         }
 
-        .day-box:hover {
-            transform: translateY(-3px);
-            border-color: #ffb6c1;
-            box-shadow: 0 6px 15px rgba(255, 182, 193, 0.4);
-        }
+        .day-box:hover { transform: translateY(-3px); border-color: #ffb6c1; box-shadow: 0 6px 15px rgba(255,182,193,0.4); }
 
-        .day-box.today {
-            border-color: #ff758c;
-            box-shadow: 0 0 0 2px #ff758c44;
-        }
+        .day-box.today { border-color: #ff758c; box-shadow: 0 0 0 2px #ff758c44; }
 
-        .day-num {
-            font-size: 12px;
-            font-weight: 700;
-            color: #aaa;
-            margin-bottom: 5px;
-        }
-
-        .day-box.today .day-num {
-            color: #ff758c;
-        }
-
-        .day-emoji {
-            font-size: 24px;
-        }
+        .day-num { font-size: 12px; font-weight: 700; color: #aaa; margin-bottom: 5px; }
+        .day-box.today .day-num { color: #ff758c; }
+        .day-emoji { font-size: 24px; }
 
         /* ── Stats ── */
         .stats-section {
@@ -239,163 +318,233 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        .stats-section h3 {
-            color: #ff758c;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 18px;
-        }
+        .stats-section h3 { color: #ff758c; text-align: center; margin-bottom: 15px; font-size: 18px; }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
             gap: 10px;
             text-align: center;
         }
 
-        .stat-item {
-            background: #fff0f3;
-            padding: 10px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .stat-item span {
-            font-size: 18px;
-            margin-right: 5px;
-        }
+        .stat-item { background: #fff0f3; padding: 10px; border-radius: 12px; font-weight: 700; font-size: 14px; }
+        .stat-item span { font-size: 18px; margin-right: 5px; }
 
         @media (max-width: 500px) {
-            .calendar {
-                grid-template-columns: repeat(5, 1fr);
-            }
+            .calendar { grid-template-columns: repeat(5,1fr); }
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <h1>✨ Trạm Cảm Xúc 🎀</h1>
-
-        <div class="status-bar">
-            <div class="status-badge connecting" id="statusBadge">
-                <div class="status-dot"></div>
-                <span id="statusText">Đang kết nối Firebase…</span>
-            </div>
+    <!-- ══════════════ LOGIN SCREEN ══════════════ -->
+    <div id="loginScreen">
+        <div class="login-card">
+            <div class="login-logo">🌸</div>
+            <h2>Trạm Cảm Xúc</h2>
+            <p>Ghi lại cảm xúc mỗi ngày của bạn.<br>Đăng nhập để lưu dữ liệu trên cloud ☁️</p>
+            <button class="btn-google" id="btnLogin">
+                <!-- Google logo SVG -->
+                <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#EA4335" d="M24 9.5c3.14 0 5.95 1.08 8.17 2.86l6.1-6.1C34.46 2.99 29.53 1 24 1 14.82 1 6.97 6.48 3.27 14.36l7.1 5.52C12.15 13.38 17.62 9.5 24 9.5z"/>
+                    <path fill="#4285F4" d="M46.52 24.5c0-1.64-.15-3.22-.42-4.75H24v9h12.7c-.55 2.96-2.2 5.47-4.68 7.16l7.18 5.58C43.44 37.27 46.52 31.33 46.52 24.5z"/>
+                    <path fill="#FBBC05" d="M10.37 28.12A14.6 14.6 0 0 1 9.5 24c0-1.43.2-2.82.55-4.12l-7.1-5.52A23.93 23.93 0 0 0 .5 24c0 3.87.92 7.52 2.54 10.75l7.33-6.63z"/>
+                    <path fill="#34A853" d="M24 47c5.52 0 10.15-1.83 13.53-4.96l-7.18-5.58c-1.99 1.34-4.54 2.13-6.35 2.13-6.38 0-11.85-3.88-13.63-9.38l-7.33 6.63C6.97 41.52 14.82 47 24 47z"/>
+                    <path fill="none" d="M0 0h48v48H0z"/>
+                </svg>
+                Đăng nhập bằng Google
+            </button>
         </div>
-        
-        <div class="controls">
-            <div class="control-group">
-                <label for="daySelect">Ngày trong tháng:</label>
-                <select id="daySelect"></select>
+    </div>
+
+    <!-- ══════════════ APP SCREEN ══════════════ -->
+    <div id="appScreen">
+
+        <!-- Top bar: avatar + tên + logout -->
+        <div class="top-bar">
+            <div class="user-info">
+                <img class="user-avatar" id="userAvatar" src="" alt="avatar">
+                <div>
+                    <div class="user-name" id="userName">—</div>
+                    <div class="user-email" id="userEmail">—</div>
+                </div>
             </div>
-            
-            <div class="control-group">
-                <label for="emotionSelect">Hôm nay bạn thế nào?</label>
-                <select id="emotionSelect">
-                    <option value="🥰">🥰 Yêu đời rạng rỡ</option>
-                    <option value="😄">😄 Vui vẻ năng lượng</option>
-                    <option value="😌">😌 Bình yên thư giãn</option>
-                    <option value="🥺">🥺 Hơi xúc động</option>
-                    <option value="😫">😫 Mệt mỏi rã rời</option>
-                    <option value="😡">😡 Bực mình chói chang</option>
-                    <option value="😭">😭 Buồn xỉu up xỉu down</option>
-                    <option value="✨">✨ Đầy tự hào</option>
-                </select>
-            </div>
-            
-            <button id="saveBtn" onclick="saveEmotion()" disabled>Ghi lại 💕</button>
+            <button class="btn-logout" id="btnLogout">Đăng xuất</button>
         </div>
 
-        <div class="calendar" id="calendar"></div>
+        <div class="app-container">
+            <h1>✨ Trạm Cảm Xúc 🎀</h1>
 
-        <div class="stats-section">
-            <h3>📊 Thống kê tháng này của bạn</h3>
-            <div class="stats-grid" id="stats"></div>
+            <div class="status-bar">
+                <div class="status-badge connecting" id="statusBadge">
+                    <div class="status-dot"></div>
+                    <span id="statusText">Đang tải dữ liệu…</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="daySelect">Ngày trong tháng:</label>
+                    <select id="daySelect"></select>
+                </div>
+                <div class="control-group">
+                    <label for="emotionSelect">Hôm nay bạn thế nào?</label>
+                    <select id="emotionSelect">
+                        <option value="🥰">🥰 Yêu đời rạng rỡ</option>
+                        <option value="😄">😄 Vui vẻ năng lượng</option>
+                        <option value="😌">😌 Bình yên thư giãn</option>
+                        <option value="🥺">🥺 Hơi xúc động</option>
+                        <option value="😫">😫 Mệt mỏi rã rời</option>
+                        <option value="😡">😡 Bực mình chói chang</option>
+                        <option value="😭">😭 Buồn xỉu up xỉu down</option>
+                        <option value="✨">✨ Đầy tự hào</option>
+                    </select>
+                </div>
+                <button id="saveBtn" disabled>Ghi lại 💕</button>
+            </div>
+
+            <div class="calendar" id="calendar"></div>
+
+            <div class="stats-section">
+                <h3>📊 Thống kê tháng này của bạn</h3>
+                <div class="stats-grid" id="stats"></div>
+            </div>
         </div>
     </div>
 
     <div class="toast" id="toast">💾 Đã lưu lên cloud! ☁️</div>
 
-    <!-- Firebase SDK (CDN) -->
+    <!-- Firebase SDK -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-        import {
-            getFirestore,
-            doc,
-            setDoc,
-            onSnapshot,
-            collection
-        } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { initializeApp }            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
+            from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-        // ── Cấu hình Firebase của bạn ──
+        // ── Config ──
         const firebaseConfig = {
-            apiKey: "AIzaSyCRChnL5wbqiF49ywAcSOWb3rwFV-ij-y0",
-            authDomain: "camxuc2026-e83c1.firebaseapp.com",
-            projectId: "camxuc2026-e83c1",
-            storageBucket: "camxuc2026-e83c1.firebasestorage.app",
+            apiKey:            "AIzaSyCRChnL5wbqiF49ywAcSOWb3rwFV-ij-y0",
+            authDomain:        "camxuc2026-e83c1.firebaseapp.com",
+            projectId:         "camxuc2026-e83c1",
+            storageBucket:     "camxuc2026-e83c1.firebasestorage.app",
             messagingSenderId: "42889646682",
-            appId: "1:42889646682:web:1c06b29c9f57bfe959fe63"
+            appId:             "1:42889646682:web:1c06b29c9f57bfe959fe63"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const db  = getFirestore(app);
+        const app      = initializeApp(firebaseConfig);
+        const db       = getFirestore(app);
+        const auth     = getAuth(app);
+        const provider = new GoogleAuthProvider();
 
-        // ── Trạng thái ──
+        // ── State ──
         const daysInMonth = 31;
-        const today = new Date().getDate();
-        let emotionsData = {};
+        const today       = new Date().getDate();
+        let emotionsData  = {};
+        let unsubscribe   = null; // realtime listener handle
 
-        // ── Khởi tạo dropdown ngày ──
+        // ── Init dropdown ──
         const daySelect = document.getElementById('daySelect');
         for (let i = 1; i <= daysInMonth; i++) {
             daySelect.innerHTML += `<option value="${i}">Ngày ${i}</option>`;
         }
         if (today <= daysInMonth) daySelect.value = today;
 
-        // ── Lắng nghe Firestore realtime (collection "emotions2026") ──
-        // Mỗi document = 1 ngày, field "emoji" lưu cảm xúc
-        const colRef = collection(db, "emotions2026");
-
-        onSnapshot(colRef,
-            (snapshot) => {
-                emotionsData = {};
-                snapshot.forEach(docSnap => {
-                    emotionsData[docSnap.id] = docSnap.data().emoji;
-                });
-                updateUI();
-                setStatus('connected');
-                document.getElementById('saveBtn').disabled = false;
-            },
-            (err) => {
-                console.error("Firestore lỗi:", err);
-                setStatus('error');
+        // ══════════════════════════════════════
+        //  AUTH STATE OBSERVER
+        // ══════════════════════════════════════
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                showApp(user);
+            } else {
+                showLogin();
             }
-        );
+        });
 
-        // ── Lưu cảm xúc lên Firestore ──
-        window.saveEmotion = async function () {
+        // ── Đăng nhập ──
+        document.getElementById('btnLogin').addEventListener('click', async () => {
+            try {
+                await signInWithPopup(auth, provider);
+                // onAuthStateChanged sẽ tự gọi showApp
+            } catch (e) {
+                console.error("Đăng nhập thất bại:", e);
+                alert("❌ Đăng nhập thất bại: " + e.message);
+            }
+        });
+
+        // ── Đăng xuất ──
+        document.getElementById('btnLogout').addEventListener('click', async () => {
+            if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+            await signOut(auth);
+        });
+
+        // ── Ghi lại cảm xúc ──
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            const user = auth.currentUser;
+            if (!user) return;
             const day     = daySelect.value;
             const emotion = document.getElementById('emotionSelect').value;
-
             try {
-                await setDoc(doc(db, "emotions2026", String(day)), { emoji: emotion });
+                await setDoc(doc(db, "users", user.uid, "emotions2026", String(day)), { emoji: emotion });
                 showToast();
             } catch (e) {
                 console.error("Lưu thất bại:", e);
-                alert("❌ Lưu thất bại. Kiểm tra kết nối hoặc Firebase Rules nhé!");
+                alert("❌ Lưu thất bại. Kiểm tra Firebase Rules nhé!\n" + e.message);
             }
-        };
+        });
 
-        // ── Render calendar ──
+        // ══════════════════════════════════════
+        //  SHOW / HIDE SCREENS
+        // ══════════════════════════════════════
+        function showLogin() {
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('appScreen').style.display   = 'none';
+            emotionsData = {};
+        }
+
+        function showApp(user) {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('appScreen').style.display   = 'block';
+
+            // Hiện thông tin user
+            document.getElementById('userName').textContent  = user.displayName || 'Bạn ơi';
+            document.getElementById('userEmail').textContent = user.email || '';
+            const avatarEl = document.getElementById('userAvatar');
+            avatarEl.src = user.photoURL || '';
+            avatarEl.style.display = user.photoURL ? 'block' : 'none';
+
+            // Bắt đầu lắng nghe Firestore của user này
+            startListening(user.uid);
+        }
+
+        function startListening(uid) {
+            if (unsubscribe) unsubscribe(); // huỷ listener cũ nếu có
+            setStatus('connecting');
+            document.getElementById('saveBtn').disabled = true;
+
+            const colRef = collection(db, "users", uid, "emotions2026");
+            unsubscribe = onSnapshot(colRef,
+                (snapshot) => {
+                    emotionsData = {};
+                    snapshot.forEach(d => { emotionsData[d.id] = d.data().emoji; });
+                    updateUI();
+                    setStatus('connected');
+                    document.getElementById('saveBtn').disabled = false;
+                },
+                (err) => {
+                    console.error("Firestore lỗi:", err);
+                    setStatus('error');
+                }
+            );
+        }
+
+        // ── Render ──
         function renderCalendar() {
-            const calendar = document.getElementById('calendar');
-            calendar.innerHTML = '';
+            const cal = document.getElementById('calendar');
+            cal.innerHTML = '';
             for (let i = 1; i <= daysInMonth; i++) {
-                const emoji  = emotionsData[String(i)] || '🤍';
+                const emoji   = emotionsData[String(i)] || '🤍';
                 const isToday = i === today ? 'today' : '';
-                calendar.innerHTML += `
+                cal.innerHTML += `
                     <div class="day-box ${isToday}">
                         <div class="day-num">${i}</div>
                         <div class="day-emoji">${emoji}</div>
@@ -403,35 +552,30 @@
             }
         }
 
-        // ── Render stats ──
         function renderStats() {
-            const statsContainer = document.getElementById('stats');
+            const el = document.getElementById('stats');
             const counts = {};
             Object.values(emotionsData).forEach(e => { counts[e] = (counts[e] || 0) + 1; });
-            statsContainer.innerHTML = '';
-            if (Object.keys(counts).length === 0) {
-                statsContainer.innerHTML = '<p style="grid-column:1/-1;color:#999">Bạn chưa ghi lại cảm xúc nào. Hãy bắt đầu nhé! 🌸</p>';
+            el.innerHTML = '';
+            if (!Object.keys(counts).length) {
+                el.innerHTML = '<p style="grid-column:1/-1;color:#999">Bạn chưa ghi lại cảm xúc nào. Hãy bắt đầu nhé! 🌸</p>';
                 return;
             }
             for (const [emoji, count] of Object.entries(counts)) {
-                statsContainer.innerHTML += `
-                    <div class="stat-item"><span>${emoji}</span> ${count} ngày</div>`;
+                el.innerHTML += `<div class="stat-item"><span>${emoji}</span> ${count} ngày</div>`;
             }
         }
 
         function updateUI() { renderCalendar(); renderStats(); }
 
-        // ── Status badge ──
         function setStatus(state) {
             const badge = document.getElementById('statusBadge');
             const text  = document.getElementById('statusText');
             badge.className = 'status-badge ' + state;
-            if (state === 'connected') text.textContent = 'Đã kết nối Firebase ☁️';
-            else if (state === 'error') text.textContent = 'Lỗi kết nối Firebase';
-            else text.textContent = 'Đang kết nối Firebase…';
+            const map = { connected: 'Đã đồng bộ ☁️', connecting: 'Đang tải dữ liệu…', error: 'Lỗi kết nối Firebase' };
+            text.textContent = map[state] || '';
         }
 
-        // ── Toast ──
         function showToast() {
             const t = document.getElementById('toast');
             t.classList.add('show');
